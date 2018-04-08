@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class TimeRecoder {
 	
 	private final int NUM_OF_WORK_DAYS = 5; // An employee works for five days from Monday to Friday 
-	private int[][] workTimePerEmployee;
+	private int[][] hours;
 	private enum WeekDays {Monday, Tuesday, Wendesday, Thursday, Friday};
-	private int[] totalPerWeekday = new int[WeekDays.values().length];
-	private int[] totalPerEmployee;
+	private int[] dayHours = new int[WeekDays.values().length];
+	private int[] weekHours;
 	
 	public static void main(String[] args) {
 		
@@ -32,9 +32,9 @@ public class TimeRecoder {
 		
 		int numOfEmployees = myScanner.nextInt();
 		
-		workTimePerEmployee = new int[numOfEmployees][NUM_OF_WORK_DAYS];
+		hours = new int[numOfEmployees][NUM_OF_WORK_DAYS];
 		
-		for(int employeeCount=0; employeeCount < workTimePerEmployee.length; employeeCount++) {
+		for(int employeeCount=0; employeeCount < hours.length; employeeCount++) {
 			
 			System.out.println("Input work time for Employee " + (employeeCount+1) + ": ");
 			
@@ -42,7 +42,7 @@ public class TimeRecoder {
 				
 				System.out.print("  Input work time for Employee " + (employeeCount+1) 
 									+ " on " + currentDay + ": ");
-				workTimePerEmployee[employeeCount][currentDay.ordinal()] = myScanner.nextInt();
+				hours[employeeCount][currentDay.ordinal()] = myScanner.nextInt();
 			}
 		}
 		
@@ -53,26 +53,26 @@ public class TimeRecoder {
 			
 		for(WeekDays currentDay:WeekDays.values()) {
 			
-			totalPerWeekday[currentDay.ordinal()] = 0;
+			dayHours[currentDay.ordinal()] = 0;
 			
-			for(int employeeCount=0; employeeCount < workTimePerEmployee.length; employeeCount++) {	
-				totalPerWeekday[currentDay.ordinal()] = totalPerWeekday[currentDay.ordinal()] 
-															+ workTimePerEmployee[employeeCount][currentDay.ordinal()];
+			for(int employeeCount=0; employeeCount < hours.length; employeeCount++) {	
+				dayHours[currentDay.ordinal()] = dayHours[currentDay.ordinal()] 
+															+ hours[employeeCount][currentDay.ordinal()];
 			}
 		}
 	}
 	
 	public void computeTotalPerEmployee() {
 		
-		totalPerEmployee = new int[workTimePerEmployee.length];
+		weekHours = new int[hours.length];
 		
-		for(int employeeCount=0; employeeCount < workTimePerEmployee.length; employeeCount++) {
+		for(int employeeCount=0; employeeCount < hours.length; employeeCount++) {
 			
-			totalPerEmployee[employeeCount] = 0;
+			weekHours[employeeCount] = 0;
 		
 			for(WeekDays currentDay:WeekDays.values()) {
-				totalPerEmployee[employeeCount] = totalPerEmployee[employeeCount] 
-															+ workTimePerEmployee[employeeCount][currentDay.ordinal()];
+				weekHours[employeeCount] = weekHours[employeeCount] 
+															+ hours[employeeCount][currentDay.ordinal()];
 			}
 		}
 		
@@ -85,7 +85,7 @@ public class TimeRecoder {
 		// print the first line: Employee   1   2   3   Totals
 		System.out.print("Employee" + addSpace("Employee".length()));
 		
-		for(int employeeCount = 0; employeeCount < workTimePerEmployee.length; employeeCount++) {
+		for(int employeeCount = 0; employeeCount < hours.length; employeeCount++) {
 			System.out.print(employeeCount+1 + "\t");
 		}
 		
@@ -96,17 +96,17 @@ public class TimeRecoder {
 		for(WeekDays currentDay:WeekDays.values()) {
 			
 			System.out.print(currentDay + addSpace(currentDay.name().length()));
-			for(int employCount = 0; employCount < workTimePerEmployee.length ;employCount++) {
-				System.out.print(workTimePerEmployee[employCount][currentDay.ordinal()] + "\t");
+			for(int employCount = 0; employCount < hours.length ;employCount++) {
+				System.out.print(hours[employCount][currentDay.ordinal()] + "\t");
 			}
-			System.out.print(totalPerWeekday[currentDay.ordinal()]);
+			System.out.print(dayHours[currentDay.ordinal()]);
 			System.out.println();
 		}
 		
 		// print total per employee
 		System.out.print("Total = " + addSpace("Total = ".length()));
-		for(int employeeCount = 0; employeeCount < workTimePerEmployee.length; employeeCount++) {
-			System.out.print(totalPerEmployee[employeeCount] +"\t");
+		for(int employeeCount = 0; employeeCount < hours.length; employeeCount++) {
+			System.out.print(weekHours[employeeCount] +"\t");
 		}
 	}
 	
