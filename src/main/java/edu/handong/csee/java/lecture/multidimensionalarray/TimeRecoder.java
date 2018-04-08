@@ -49,7 +49,7 @@ public class TimeRecoder {
 	
 	public void computeTotals() {
 		
-		weekHours = new int[hours.length];
+		weekHours = new int[hours.length]; // instantiate this array
 			
 		for(WeekDays currentDay:WeekDays.values()) {
 			
