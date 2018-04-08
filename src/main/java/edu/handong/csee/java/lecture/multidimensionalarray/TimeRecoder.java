@@ -80,9 +80,10 @@ public class TimeRecoder {
 	
 	public void printResults() {
 		
+		System.out.println();
 		
 		// print the first line: Employee   1   2   3   Totals
-		System.out.print("Employee\t");
+		System.out.print("Employee" + addSpace("Employee".length()));
 		
 		for(int employeeCount = 0; employeeCount < workTimePerEmployee.length; employeeCount++) {
 			System.out.print(employeeCount+1 + "\t");
@@ -91,22 +92,34 @@ public class TimeRecoder {
 		System.out.print("Totals");
 		System.out.println();
 		
-		
 		// print work time per each weekday
 		for(WeekDays currentDay:WeekDays.values()) {
 			
-			System.out.print(currentDay + "\t");
+			System.out.print(currentDay + addSpace(currentDay.name().length()));
 			for(int employCount = 0; employCount < workTimePerEmployee.length ;employCount++) {
 				System.out.print(workTimePerEmployee[employCount][currentDay.ordinal()] + "\t");
 			}
-			System.out.print(totalPerWeekday[currentDay.ordinal()] + "\t");
+			System.out.print(totalPerWeekday[currentDay.ordinal()]);
 			System.out.println();
 		}
 		
 		// print total per employee
-		System.out.print("Total = \t");
+		System.out.print("Total = " + addSpace("Total = ".length()));
 		for(int employeeCount = 0; employeeCount < workTimePerEmployee.length; employeeCount++) {
-			System.out.print(totalPerEmployee[employeeCount] +" \t");
+			System.out.print(totalPerEmployee[employeeCount] +"\t");
 		}
+	}
+	
+	
+	private String addSpace(int length) {
+		
+		final int maxWeekDayLength = 9;
+		String spaces = " ";
+		
+		for(int spaceCount=0; spaceCount < maxWeekDayLength-length; spaceCount++) {
+			spaces = spaces + " ";
+		}
+		
+		return spaces;
 	}
 }
