@@ -17,7 +17,6 @@ public class TimeRecorder {
 		myTimeRecoder.getData();
 		
 		myTimeRecoder.computeTotalPerWeekDay();
-		myTimeRecoder.computeTotalPerEmployee();
 		
 		myTimeRecoder.printResults();
 
@@ -60,22 +59,6 @@ public class TimeRecorder {
 															+ hours[employeeCount][currentDay.ordinal()];
 			}
 		}
-	}
-	
-	public void computeTotalPerEmployee() {
-		
-		weekHours = new int[hours.length];
-		
-		for(int employeeCount=0; employeeCount < hours.length; employeeCount++) {
-			
-			weekHours[employeeCount] = 0;
-		
-			for(WeekDays currentDay:WeekDays.values()) {
-				weekHours[employeeCount] = weekHours[employeeCount] 
-															+ hours[employeeCount][currentDay.ordinal()];
-			}
-		}
-		
 	}
 	
 	public void printResults() {
