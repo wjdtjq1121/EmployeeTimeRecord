@@ -110,7 +110,6 @@ public class TimeRecoder {
 		}
 	}
 	
-	
 	private String addSpace(int length) {
 		
 		final int maxWeekDayLength = 9;
