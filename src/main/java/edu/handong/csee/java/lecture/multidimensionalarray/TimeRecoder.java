@@ -15,8 +15,11 @@ public class TimeRecoder {
 		TimeRecoder myTimeRecoder = new TimeRecoder();
 		
 		myTimeRecoder.getData();
+		
 		myTimeRecoder.computeTotalPerWeekDay();
 		myTimeRecoder.computeTotalPerEmployee();
+		
+		myTimeRecoder.printResults();
 
 	}
 	
@@ -25,7 +28,7 @@ public class TimeRecoder {
 		Scanner myScanner = new Scanner(System.in);
 		
 		System.out.print("How many employees do you want" +
-								"to process for their work time?");
+								"to process for their work time? ");
 		
 		int numOfEmployees = myScanner.nextInt();
 		
@@ -33,11 +36,11 @@ public class TimeRecoder {
 		
 		for(int employeeCount=0; employeeCount < workTimePerEmployee.length; employeeCount++) {
 			
-			System.out.print("Input work time for Employee " + (employeeCount+1) + ": ");
+			System.out.println("Input work time for Employee " + (employeeCount+1) + ": ");
 			
 			for(WeekDays currentDay:WeekDays.values()) {
 				
-				System.out.print("Input work time for Employee " + (employeeCount+1) 
+				System.out.print("  Input work time for Employee " + (employeeCount+1) 
 									+ " on " + currentDay + ": ");
 				workTimePerEmployee[employeeCount][currentDay.ordinal()] = myScanner.nextInt();
 			}
@@ -47,10 +50,63 @@ public class TimeRecoder {
 	}
 	
 	public void computeTotalPerWeekDay() {
-		
+			
+		for(WeekDays currentDay:WeekDays.values()) {
+			
+			totalPerWeekday[currentDay.ordinal()] = 0;
+			
+			for(int employeeCount=0; employeeCount < workTimePerEmployee.length; employeeCount++) {	
+				totalPerWeekday[currentDay.ordinal()] = totalPerWeekday[currentDay.ordinal()] 
+															+ workTimePerEmployee[employeeCount][currentDay.ordinal()];
+			}
+		}
 	}
 	
 	public void computeTotalPerEmployee() {
 		
+		totalPerEmployee = new int[workTimePerEmployee.length];
+		
+		for(int employeeCount=0; employeeCount < workTimePerEmployee.length; employeeCount++) {
+			
+			totalPerEmployee[employeeCount] = 0;
+		
+			for(WeekDays currentDay:WeekDays.values()) {
+				totalPerEmployee[employeeCount] = totalPerEmployee[employeeCount] 
+															+ workTimePerEmployee[employeeCount][currentDay.ordinal()];
+			}
+		}
+		
+	}
+	
+	public void printResults() {
+		
+		
+		// print the first line: Employee   1   2   3   Totals
+		System.out.print("Employee\t");
+		
+		for(int employeeCount = 0; employeeCount < workTimePerEmployee.length; employeeCount++) {
+			System.out.print(employeeCount+1 + "\t");
+		}
+		
+		System.out.print("Totals");
+		System.out.println();
+		
+		
+		// print work time per each weekday
+		for(WeekDays currentDay:WeekDays.values()) {
+			
+			System.out.print(currentDay + "\t");
+			for(int employCount = 0; employCount < workTimePerEmployee.length ;employCount++) {
+				System.out.print(workTimePerEmployee[employCount][currentDay.ordinal()] + "\t");
+			}
+			System.out.print(totalPerWeekday[currentDay.ordinal()] + "\t");
+			System.out.println();
+		}
+		
+		// print total per employee
+		System.out.print("Total = \t");
+		for(int employeeCount = 0; employeeCount < workTimePerEmployee.length; employeeCount++) {
+			System.out.print(totalPerEmployee[employeeCount] +" \t");
+		}
 	}
 }
