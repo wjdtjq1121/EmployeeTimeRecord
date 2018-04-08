@@ -2,7 +2,7 @@ package edu.handong.csee.java.lecture.multidimensionalarray;
 
 import java.util.Scanner;
 
-public class TimeRecoder {
+public class TimeRecorder {
 	
 	private final int NUM_OF_WORK_DAYS = 5; // An employee works for five days from Monday to Friday 
 	private int[][] hours;
@@ -12,7 +12,7 @@ public class TimeRecoder {
 	
 	public static void main(String[] args) {
 		
-		TimeRecoder myTimeRecoder = new TimeRecoder();
+		TimeRecorder myTimeRecoder = new TimeRecorder();
 		
 		myTimeRecoder.getData();
 		
